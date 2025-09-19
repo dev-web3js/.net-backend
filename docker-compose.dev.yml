@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # Development version - faster builds with volume mounting
+  houseiana-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    container_name: houseiana-backend-dev
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:4000
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=houseiana;Username=postgres;Password=houseiana123;
+      - ConnectionStrings__Redis=redis:6379
+      - JwtSettings__Secret=development-jwt-secret-key-not-for-production-use-only
+      - JwtSettings__Issuer=houseiana-api
+      - JwtSettings__Audience=houseiana-client
+      - JwtSettings__ExpiryInHours=24
+    volumes:
+      - .:/app
+      - /app/bin
+      - /app/obj
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - houseiana-network
+    command: ["dotnet", "watch", "run", "--urls", "http://+:4000"]
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: houseiana-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: houseiana
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: houseiana123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    networks:
+      - houseiana-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d houseiana"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: houseiana-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - houseiana-network
+    command: redis-server --appendonly yes
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+
+networks:
+  houseiana-network:
+    driver: bridge
