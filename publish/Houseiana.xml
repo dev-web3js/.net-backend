@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Houseiana</name>
+    </assembly>
+    <members>
+        <member name="M:Houseiana.Controllers.AuthController.Register(Houseiana.DTOs.RegisterDto)">
+            <summary>
+            Register a new user
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.Login(Houseiana.DTOs.LoginDto)">
+            <summary>
+            Login user
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.Logout">
+            <summary>
+            Logout user
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.GetProfile">
+            <summary>
+            Get user profile
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.UpdateProfile(Houseiana.DTOs.UpdateProfileDto)">
+            <summary>
+            Update user profile
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.BecomeHost">
+            <summary>
+            Become a host
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.RefreshToken">
+            <summary>
+            Refresh JWT token
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.AuthController.ValidateToken">
+            <summary>
+            Validate current token
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.GetBookings(System.Int32,System.Int32)">
+            <summary>
+            Get user's bookings with pagination
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.GetBooking(System.String)">
+            <summary>
+            Get booking by ID
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.CreateBooking(System.Object)">
+            <summary>
+            Create new booking
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.UpdateBooking(System.String,System.Object)">
+            <summary>
+            Update booking
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.CancelBooking(System.String,System.Object)">
+            <summary>
+            Cancel booking
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.GetHostBookings">
+            <summary>
+            Get host's bookings
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.BookingsController.GetGuestBookings">
+            <summary>
+            Get guest's bookings
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.HomeController.GetHello">
+            <summary>
+            Get API health status
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.HomeController.GetHealth">
+            <summary>
+            Get API health status
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.GetListings(System.Int32,System.Int32)">
+            <summary>
+            Get all listings with pagination
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.GetListing(System.String)">
+            <summary>
+            Get listing by ID
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.CreateListing(System.Object)">
+            <summary>
+            Create new listing (Host only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.UpdateListing(System.String,System.Object)">
+            <summary>
+            Update listing (Host only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.DeleteListing(System.String)">
+            <summary>
+            Delete listing (Host only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.GetHostListings(System.String)">
+            <summary>
+            Get host's listings
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.ListingsController.SearchListings(System.Object)">
+            <summary>
+            Search listings
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.GetNotifications">
+            <summary>
+            Get user's notifications
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.CreateNotification(System.Object)">
+            <summary>
+            Create new notification (Admin/System only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.MarkAsRead(System.String)">
+            <summary>
+            Mark notification as read
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.DeleteNotification(System.String)">
+            <summary>
+            Delete notification
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.SendEmailNotification(Houseiana.Controllers.EmailNotificationRequest)">
+            <summary>
+            Send email notification (Admin only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.NotificationsController.SendPushNotification(Houseiana.Controllers.PushNotificationRequest)">
+            <summary>
+            Send push notification (Admin only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.GetUsers(System.Int32,System.Int32)">
+            <summary>
+            Get all users (Admin only)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.GetUser(System.String)">
+            <summary>
+            Get user by ID
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.UpdateUser(System.String,System.Object)">
+            <summary>
+            Update user profile
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.DeleteUser(System.String)">
+            <summary>
+            Delete user (Admin only or self)
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.VerifyEmail(System.String,Houseiana.Controllers.VerifyEmailRequest)">
+            <summary>
+            Verify user email
+            </summary>
+        </member>
+        <member name="M:Houseiana.Controllers.UsersController.VerifyPhone(System.String,Houseiana.Controllers.VerifyPhoneRequest)">
+            <summary>
+            Verify user phone
+            </summary>
+        </member>
+    </members>
+</doc>

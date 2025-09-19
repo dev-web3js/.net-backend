@@ -22,8 +22,19 @@ builder.Services.AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
 // Database configuration
+var connectionString = builder.Environment.IsProduction()
+    ? builder.Configuration.GetConnectionString("DefaultConnection")
+    : builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<HouseianaDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseNpgsql(connectionString);
+    if (builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+        options.EnableDetailedErrors();
+    }
+});
 
 // Identity configuration
 builder.Services.AddIdentity<User, IdentityRole>()
@@ -149,8 +160,18 @@ app.MapControllers();
 app.MapHub<ChatHub>("/hubs/chat");
 app.MapHub<NotificationHub>("/hubs/notifications");
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "4000";
-Console.WriteLine($"🚀 Backend server running on http://localhost:{port}");
-Console.WriteLine($"📚 API Documentation available at http://localhost:{port}/api");
+var port = Environment.GetEnvironmentVariable("PORT") ?? Environment.GetEnvironmentVariable("WEBSITES_PORT") ?? "4000";
+var environment = app.Environment.EnvironmentName;
 
-app.Run($"http://localhost:{port}");
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine($"🚀 Backend server running on http://localhost:{port}");
+    Console.WriteLine($"📚 API Documentation available at http://localhost:{port}/api");
+    app.Run($"http://localhost:{port}");
+}
+else
+{
+    Console.WriteLine($"🚀 Houseiana API starting in {environment} mode");
+    Console.WriteLine($"📚 API Documentation available at /api");
+    app.Run();
+}
